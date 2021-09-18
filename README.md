@@ -1,5 +1,5 @@
 # Devops_all_in_one_vm
-This vagrant build is intended to provide a virtualbox vm where you can have most devops tools to play with and nested virtualization configured. 
+This vagrant build is intended to provide a virtualbox vm where you can have most devops tools to play with and nested KVM hypervisor configured. 
 
 This side project aims to provide an ultimate Devops sandbox VM the community can use to learn stuff without having to install anything. Contibution is welcome too.
 You'll just need to run `vagrant up` command to spin it.
