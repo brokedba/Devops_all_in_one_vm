@@ -3,7 +3,8 @@ This vagrant build is intended to provide a virtualbox vm where you can have mos
 You'll just need to run `vagrant up` command to spin it.
 - Note: Contibution is welcome too.
 
-The current scope for this side project includes autosetup of the below devops tools :
+# The current scope 
+ The bundle includes the below services/devops tools :
 - kvm
 - kcli (libvirt cli wrapper)
 - ansible + AWX (maybe replaced by Oracle linux aumtomation managerin the future)
