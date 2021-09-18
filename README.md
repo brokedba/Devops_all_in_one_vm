@@ -12,13 +12,13 @@ In other words it's an ultimate Devops sandbox that the community can use to lea
  The bundle includes the below services/devops tools :
 - kvm
 - kcli (libvirt cli wrapper)
-- ansible + AWX (maybe replaced by Oracle linux aumtomation managerin the future)
+- Ansible AWX (maybe replaced by Oracle linux aumtomation managerin the future)
 - Hashicorp
 - Terraform (KVM libvirt provider)
-- packaer/vault
+- Packer/vault
 - Docker
 - Kubernetes single node
-- helm
+- Helm
 - Kubernetes Dashboard
 - Jenkins
 - Cloud shell CLI (OCI/AWS/AZ/GCP) install only
