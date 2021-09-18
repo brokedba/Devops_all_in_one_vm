@@ -42,11 +42,11 @@ Navigate to the AWX build and issue the `vagrant up` command.
 
 ```
 # Linux
-cd /path/to/vagrant/devops
+cd /path/to/Devops_all_in_one_vm
 vagrant up
 
 Rem Windows
-cd \path\to\vagrant\devops
+cd \path\to\Devops_all_in_one_vm
 vagrant up
 ```
 
