@@ -29,7 +29,7 @@ The current scope for this side project includes autosetup of the below devops t
 Clone or [Download](https://github.com/brokedba/devops_all_in_one/archive/master.zip) the repository.
 
 ```
-git clone https://github.com/oraclebase/vagrant.git
+git clone https://github.com/brokedba/Devops_all_in_one.git
 ```
 
 Navigate to the AWX build and issue the `vagrant up` command.
