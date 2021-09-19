@@ -38,7 +38,7 @@ Clone or [Download](https://github.com/brokedba/devops_all_in_one/archive/master
 git clone https://github.com/brokedba/Devops_all_in_one_vm.git
 ```
 
-Navigate to the AWX build and issue the `vagrant up` command.
+Navigate to the build directory and issue the `vagrant up` command.
 
 ```
 # Linux
@@ -49,7 +49,9 @@ Rem Windows
 cd \path\to\Devops_all_in_one_vm
 vagrant up
 ```
-
+# KVM
+Once the build is complete
+# AWX
 Once the build is complete you should be able to access AWX using one of the following URLs.
 
 * [http://localhost:8080](http://localhost:8080)
