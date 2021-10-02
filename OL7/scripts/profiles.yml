@@ -20,7 +20,7 @@ rhel:
  disks:
   - size: 10
  cmds:
-  - echo -e "unix1234\nunix1234" | passwd root
+  - echo -e "unix1234\nunix1234" | passwd root 
 
 debian:
  image: debian-8-openstack-amd64.qcow2
@@ -30,7 +30,7 @@ debian:
   - default
  pool: default
  cmds:
-  - echo unix1234 | passwd --stdin root
+  - echo -e "unix1234\nunix1234" | passwd root 
 
 ubuntu:
  image: xenial-server-cloudimg-amd64-disk1.img

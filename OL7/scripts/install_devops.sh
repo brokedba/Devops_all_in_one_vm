@@ -8,7 +8,7 @@ echo "**************************************************************************
 echo "Install KMV and Kcli" `date`                                                
 echo "******************************************************************************"    
 
-yum install -y qemu-kvm qemu-img virt-manager libvirt libvirt-python libvirt-client virt-install virt-viewer virt-top libguestfs-tools-c
+yum install -y qemu-kvm qemu-img virt-manager libvirt libvirt-python libvirt-client virt-install virt-viewer virt-top libguestfs-tools-c fuse
 /usr/libexec/qemu-kvm --version
 systemctl enable --now libvirtd
 systemctl status libvirtd |grep Active
@@ -16,23 +16,29 @@ mkdir /u01/guest_images
 sudo setfacl -m u:$(id -un):rwx /u01/guest_images
 pip2 uninstall -y urllib3
 yum reinstall -y python-requests
-yum install -y fuse 
 modprobe fuse
+echo "fuse" > /etc/modules-load.d/fuse.conf
+yum install -y http://mirror.centos.org/centos/7/os/x86_64/Packages/OVMF-20180508-6.gitee3198e672e2.el7.noarch.rpm  #UEFI firmware
 virt-host-validate
-
+virsh pool-define-as default dir - - - - "/u01/guest_images"
+virsh pool-build default
+virsh pool-start default 
+virsh pool-autostart default
 echo
 echo +++++ "Install Kcli" `date` +++++++ 
 echo
 curl https://raw.githubusercontent.com/karmab/kcli/master/install.sh | sh 
-mv  /root/.kcli/profile.yml  /root/.kcli/profile.yml.old
-cp /vagrant/scripts/profiles.yml  /root/.kcli/
+#mv  /root/.kcli/profiles.yml  /root/.kcli/profiles.yml.old
+alias kcli='docker run --net host -i --rm --security-opt label=disable -v /root/.kcli:/root/.kcli -v /root/.ssh:/root/.ssh -v /u01/guest_images:/u01/guest_images -v /var/run/libvirt:/var/run/libvirt -v $PWD:/workdir quay.io/karmab/kcli'
+echo create kcli configuration
 kcli create host kvm -H 127.0.0.1 local
-cp /root/.kcli/config.yml /root/.kcli/config.yml.old
 sed -i '4 i \ \ virttype: qemu' /root/.kcli/config.yml
 echo " adapt kcli alias with the default pool path /u01/guest_image "
 cp /root/.bashrc /root/bashrc.old
 sed -i '13d' /root/.bashrc
 echo "alias kcli='docker run --net host -it --rm --security-opt label=disable -v /root/.kcli:/root/.kcli -v /root/.ssh:/root/.ssh -v /u01/guest_images:/u01/guest_images -v /var/run/libvirt:/var/run/libvirt -v $PWD:/workdir quay.io/karmab/kcli'" >> /root/.bashrc
+source /root/.bashrc
+cp /vagrant/scripts/profiles.yml  /root/.kcli/
 echo "******************************************************************************"
 echo "Install terraform." `date`
 echo "******************************************************************************"
@@ -98,7 +104,6 @@ echo "**************************************************************************
    rpm –import http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
    yum install jenkins –y
 
-
 echo "******************************************************************************"
 echo "Install Single node kubernetes." `date`
 echo "******************************************************************************"
@@ -125,26 +130,28 @@ repo_gpgcheck=1
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 exclude=kubelet kubeadm kubectl
 EOF
-
 echo " install kube binaries kubelet, kubectl and kubeadm"
-
-yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+yum install -y kubelet kubeadm kubectl iproute-tc --disableexcludes=kubernetes
 systemctl enable --now kubelet
-
-echo " Start the cluster using calico network service (L3 layer routing)"
+echo " initiate a cluster using kubeadm init"
 echo "... This will take few minutes...Make not of the kubeadm join message for the future node addition"
-kubeadm init --pod-network-cidr=192.168.0.0/16
+kubeadm init --pod-network-cidr=192.168.0.0/16 
+# --ignore-preflight-errors=SystemVerification to ignore btrfs fatal error if defined
 echo " Post install setup"
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
+echo" set KUBECONFIG for root user"
+echo "KUBECONFIG=/etc/kubernetes/admin.conf; export KUBECONFIG" >> /root/.bashrc
 echo 
-echo "--- Calico svc install"
-kubectl apply -f https://docs.projectcalico.org/v3.11/manifests/calico.yaml
+ systemctl daemon-reload
+echo " configure a cluster with calico network service (L3 layer routing)"
+kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 echo 
 echo "--- Enable POD run on the Master Node (single cluster) ---"
 kubectl taint nodes --all node-role.kubernetes.io/master-
 echo 
+kubectl get nodes -o wide
 echo "Install the kubernetes Dashboard "
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta8/aio/deploy/recommended.yaml
 # continue the configuration by following the link https://medium.com/@srpillai/single-node-kubernetes-on-centos-c8c3507e3e65
@@ -153,6 +160,8 @@ echo "**************************************************************************
 echo "Install helm." `date`
 echo "******************************************************************************"
  
- curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
- chmod 700 get_helm.sh
- ./get_helm.sh
+ # curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+ #chmod 700 get_helm.sh
+ #./get_helm.sh 
+
+ kcli download helm
