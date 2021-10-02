@@ -89,6 +89,8 @@ my-nginx   3/3     3            3           21m   nginx        nginx:1.14.2   ap
 [root@localhost ~]# kubectl get namespace
 [root@localhost ~]# kubectl get events --sort-by=.metadata.creationTimestamp
 ```
+  - Helm
+  - Kubernetes Dashboard
 # AWX
 Once the build is complete you should be able to access AWX using one of the following URLs. note: still in progress
 
@@ -100,3 +102,4 @@ Log in using the following credentials, assuming you've not changed them.
 * Username: admin
 * Password: password
 
+# JENKINS
