@@ -50,7 +50,7 @@ cd \path\to\Devops_all_in_one_vm
 vagrant up
 ```
 # KVM
-- display current setup
+- Display current setup
 ```
 [root@localhost ~]# kcli list pool
 +---------+-------------------+
