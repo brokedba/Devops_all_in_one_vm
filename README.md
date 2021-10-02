@@ -50,7 +50,23 @@ cd \path\to\Devops_all_in_one_vm
 vagrant up
 ```
 # KVM
-Once the build is complete
+- display current setup
+```
+[root@localhost ~]# kcli list pool
++---------+-------------------+
+| Pool    |        Path       |
++---------+-------------------+
+| default | /u01/guest_images |
++---------+-------------------+
+[root@localhost ~]# kcli list network
+Listing Networks...
++---------+--------+------------------+------+---------+------+
+| Network |  Type  |       Cidr       | Dhcp |  Domain | Mode |
++---------+--------+------------------+------+---------+------+
+| default | routed | 192.168.122.0/24 | True | default | nat  |
++---------+--------+------------------+------+---------+------+
+```
+
 # KUBERNETES
 - create nginx deployment and list current K8 info
 ```
