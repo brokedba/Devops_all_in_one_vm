@@ -103,3 +103,9 @@ Log in using the following credentials, assuming you've not changed them.
 * Password: password
 
 # JENKINS
+- Portal configuration
+- Cli Help
+```
+[root@localhost ~]# wget http://localhost:8089/jnlpJars/jenkins-cli.jar
+[root@localhost ~]# java -jar jenkins-cli.jar -s http://localhost:8089/ -webSocket -auth admin:password help
+```
