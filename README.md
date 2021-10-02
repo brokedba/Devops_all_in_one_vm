@@ -57,10 +57,10 @@ Once the build is complete
 [root@localhost ~]# kubectl -n kube-system get cm kubeadm-config -o yaml
 [root@localhost ~]# kubectl apply -f https://raw.githubusercontent.com/kubernetes/website/master/content/en/examples/application/nginx-app.yaml
 [root@localhost ~]# kubectl get pods -o wide
-NAME                        READY   STATUS    RESTARTS   AGE   IP                NODE                    NOMINATED NODE   READINESS GATES
-my-nginx-66b6c48dd5-25qr2   1/1     Running   0          12m   192.168.102.137   localhost.localdomain   <none>           <none>
-my-nginx-66b6c48dd5-9bz4h   1/1     Running   0          12m   192.168.102.138   localhost.localdomain   <none>           <none>
-my-nginx-66b6c48dd5-s4hrn   1/1     Running   0          12m   192.168.102.139   localhost.localdomain   <none>           <none>
+NAME                        READY   STATUS    RESTARTS   AGE
+my-nginx-66b6c48dd5-25qr2   1/1     Running   0          12m
+my-nginx-66b6c48dd5-9bz4h   1/1     Running   0          12m
+my-nginx-66b6c48dd5-s4hrn   1/1     Running   0          12m
 
 [root@localhost ~]# kubectl describe deploy my-nginx
 [root@localhost ~]# kubectl get services --sort-by=.metadata.name
