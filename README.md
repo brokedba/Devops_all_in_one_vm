@@ -90,7 +90,7 @@ my-nginx   3/3     3            3           21m   nginx        nginx:1.14.2   ap
 [root@localhost ~]# kubectl get events --sort-by=.metadata.creationTimestamp
 ```
 # AWX
-Once the build is complete you should be able to access AWX using one of the following URLs.
+Once the build is complete you should be able to access AWX using one of the following URLs. note: still in progress
 
 * [http://localhost:8080](http://localhost:8080)
 * [https://localhost:8443](https://localhost:8443)
