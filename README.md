@@ -62,7 +62,6 @@ my-nginx-66b6c48dd5-25qr2   1/1     Running   0          12m
 my-nginx-66b6c48dd5-9bz4h   1/1     Running   0          12m
 my-nginx-66b6c48dd5-s4hrn   1/1     Running   0          12m
 
-[root@localhost ~]# kubectl describe deploy my-nginx
 [root@localhost ~]# kubectl get services --sort-by=.metadata.name
 NAME           TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
 kubernetes     ClusterIP      10.96.0.1       <none>        443/TCP        72m
