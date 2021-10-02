@@ -10,7 +10,7 @@ In other words it's an ultimate Devops sandbox that the community can use to lea
 
 # The current scope 
  The bundle includes the below services/devops tools :
-- kvm
+- KVM
   - kcli (libvirt cli wrapper)
 - Ansible AWX (Or replaced by Oracle linux aumtomation manager)
 - Hashicorp
