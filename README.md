@@ -68,7 +68,7 @@ Listing Networks...
 ```
 
 # KUBERNETES
-- create nginx deployment and list current K8 info
+- Create nginx deployment and list current K8 info
 ```
 [root@localhost ~]# kubectl -n kube-system get cm kubeadm-config -o yaml
 [root@localhost ~]# kubectl apply -f https://raw.githubusercontent.com/kubernetes/website/master/content/en/examples/application/nginx-app.yaml
