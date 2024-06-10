@@ -4,7 +4,10 @@ This vagrant build is intended to provide a virtualbox vm where you can have mos
 
  
 In other words it's an ultimate Devops sandbox that the community can use to learn stuff without having to install anything. You'll just need to run `vagrant up` command to spin it.
-- Note: Contibution is welcome too.
+
+**Note:** 
+  - Host port forwarding is still having issues which means, contibutions are definitely welcome ;).
+  - For now the oly build available is under ../OL7  but more EL8 builds will soon be added
  
 
 
@@ -15,11 +18,22 @@ In other words it's an ultimate Devops sandbox that the community can use to lea
 - Ansible AWX (Or replaced by Oracle linux aumtomation manager)
 - Hashicorp
   - Terraform (KVM libvirt provider)
-  - Packer/vault
+  - Packer
+  - vault
 - Docker
-- Kubernetes single node
+- Kubernetes single node (1.28)
   - Helm
   - Kubernetes Dashboard
+  - k9s
+  - kubectl autocompletion
+  - kubescape
+  - And more...
+- Compliance as code
+  - checkov
+  - trivy
+  - tfsec
+  - terrascan
+  - tfscan  
 - Jenkins
 - Cloud shell CLI (OCI/AWS/AZ/GCP) install only
 - Other: tmate,bind-utils etc
@@ -42,7 +56,7 @@ Navigate to the build directory and issue the `vagrant up` command.
 
 ```
 # Linux
-cd /path/to/Devops_all_in_one_vm
+cd /path/to/Devops_all_in_one_vm/OL7
 vagrant up
 
 Rem Windows
@@ -66,7 +80,38 @@ Listing Networks...
 | default | routed | 192.168.122.0/24 | True | default | nat  |
 +---------+--------+------------------+------+---------+------+
 ```
+# TERRAFORM (KVM)
+```
 
+[root@localhost]# wget  https://github.com/dmacvicar/terraform-provider-libvirt/releases/download/v0.6.2/terraform-provider-libvirt-0.6.2+git.1585292411.8cbe9ad0.Fedora_28.x86_64.tar.gz
+[root@localhost]# tar xvf terraform-provider-libvirt-**.tar.gz
+```
+- Add the plugin in a local registry
+```
+[root@localhost]# mkdir –p ~/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/0.6.2/linux_amd64
+[root@localhost]# mv terraform-provider-libvirt ~/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/0.6.2/linux_amd64
+```
+- Add the below code block to the main.tf file to map libvirt references with the actual provider
+```
+[root@localhost projects]# cd /root/projects/terraform
+[root@localhost]# vi libvirt.tf
+...
+terraform {
+ required_version = ">= 0.13"
+  required_providers {
+    libvirt = {
+      source  = "dmacvicar/libvirt"
+      version = "0.6.2"
+    }
+  }
+}
+... REST of the Config
+```
+- run :
+  `terraform init && terraform plan`
+
+  Read my full tutorial [here](http://www.brokedba.com/2021/12/terraform-for-dummies-part-5-terraform.html)
+  
 # KUBERNETES
 - Create nginx deployment and list current K8 info
 ```
@@ -89,10 +134,35 @@ my-nginx   3/3     3            3           21m   nginx        nginx:1.14.2   ap
 [root@localhost ~]# kubectl get namespace
 [root@localhost ~]# kubectl get events --sort-by=.metadata.creationTimestamp
 ```
-  - Helm
-  - Kubernetes Dashboard
-# AWX
-Once the build is complete you should be able to access AWX using one of the following URLs. note: still in progress
+  - **Helm**
+```
+[root@localhost ~]# helm version --short
+    v3.15.1+ge211f2a
+
+[root@localhost ~]# helm repo add stable https://charts.helm.sh/stable
+[root@localhost ~]# helm repo add bitnami https://charts.bitnami.com/bitnami
+   "bitnami" has been added to your repositories
+   "stable" has been added to your repositories
+
+[root@localhost ~]# helm search repo list
+NAME                            CHART VERSION   APP VERSION     DESCRIPTION
+bitnami/kube-state-metrics      4.2.3           2.12.0          kube-state-metrics is a simple service that lis...
+bitnami/redis                   19.5.2          7.2.5           Redis(R) is an open source, advanced key-value ...
+bitnami/redis-cluster           10.2.3          7.2.5           Redis(R) is an open source, scalable, distribut...
+bitnami/valkey                  0.1.0           7.2.4           Valkey is an open source, advanced key-value st...
+stable/redis                    10.5.7          5.0.7           DEPRECATED Open source, advanced key-value stor...
+    
+```
+  - **Kubernetes Dashboard**
+    ```
+    kubectl proxy
+    Starting to serve on 127.0.0.1:8001
+    HTTP URL: http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+    
+    ```
+# ~AWX~  
+ This will be replaced by OLAM (Oracle Fork that doesn't require K8 to run but just an rpm). Thank you AWX maintainers for pooping the party
+~Once the build is complete you should be able to access AWX using one of the following URLs. note: still in progress~
 
 * [http://localhost:8080](http://localhost:8080)
 * [https://localhost:8443](https://localhost:8443)
