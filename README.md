@@ -160,8 +160,12 @@ stable/redis                    10.5.7          5.0.7           DEPRECATED Open 
     HTTP URL: http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
     
     ```
-# ~AWX~  
- This will be replaced by OLAM (Oracle Fork that doesn't require K8 to run but just an rpm). Thank you AWX maintainers for pooping the party
+ - **K9s**
+![image](https://github.com/brokedba/Devops_all_in_one_vm/assets/29458929/539f42f4-2138-4da9-bbc2-0fb2acff69b0)
+
+    
+# AWX  
+ in EL8, This will be replaced by OLAM (Oracle Fork that is rpm based). Thank you AWX maintainers for pooping the party with K8/docker complexity.
 ~Once the build is complete you should be able to access AWX using one of the following URLs. note: still in progress~
 
 * [http://localhost:8080](http://localhost:8080)
