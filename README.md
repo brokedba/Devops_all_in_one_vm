@@ -167,6 +167,16 @@ stable/redis                    10.5.7          5.0.7           DEPRECATED Open 
 # AWX  
  in EL8, This will be replaced by OLAM (Oracle Fork that is rpm based). Thank you AWX maintainers for pooping the party with K8/docker complexity.
 ~Once the build is complete you should be able to access AWX using one of the following URLs. note: still in progress~
+```
+VERSION: 17.0.1   
+Deployment framework: Docker
+[root@localhost]# docker ps
+CONTAINER ID   IMAGE                COMMAND                  CREATED              STATUS              PORTS                                    NAMES
+ad0415de0acd   ansible/awx:17.0.1   "/usr/bin/tini -- /u…"   About a minute ago   Up About a minute   8052/tcp                                awx_task
+d323791a27cb   ansible/awx:17.0.1   "/usr/bin/tini -- /b…"   11 minutes ago       Up 11 minutes       0.0.0.0:80->8052/tcp, :::80->8052/tcp   awx_web
+313ba9a22186   postgres:12          "docker-entrypoint.s…"   11 minutes ago       Up 11 minutes       5432/tcp                                awx_postgres
+56385b68670d   redis                "docker-entrypoint.s…"   11 minutes ago       Up 11 minutes       6379/tcp                                awx_redis
+```
 
 * [http://localhost:8080](http://localhost:8080)
 * [https://localhost:8443](https://localhost:8443)
