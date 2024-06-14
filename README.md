@@ -186,6 +186,9 @@ Log in using the following credentials, assuming you've not changed them.
 * Username: admin
 * Password: password
 
+![image](https://github.com/brokedba/Devops_all_in_one_vm/assets/29458929/b17662d7-9345-43a1-90bd-9dc4df5b007d)
+
+
 # JENKINS
 - Portal configuration
 - Cli Help
