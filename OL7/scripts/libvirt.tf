@@ -1,7 +1,15 @@
 provider "libvirt" {
   uri = "qemu:///system"
 }
-
+terraform {
+ required_version = ">= 0.13"
+  required_providers {
+    libvirt = {
+      source  = "dmacvicar/libvirt"
+      version = "0.6.2"
+    }
+  }
+}
 #provider "libvirt" {
 #  alias = "server2"
 #  uri   = "qemu+ssh://root@192.168.100.10/system"

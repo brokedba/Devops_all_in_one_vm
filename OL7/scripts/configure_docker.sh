@@ -15,6 +15,13 @@ echo "**************************************************************************
 #STORAGE_DRIVER=overlay2
 #DEVS=/dev/sdc1
 #EOF 
+# As part of the platform upgrade, the Docker was also upgraded to v24. 
+# since then Docker dropped support for the overlay2.override_kernel_check storage
+# 2024 remove the following line  "storage-opts": ["overlay2.override_kernel_check=true"]
+# 2024 overlay2: docker is storing images on a file system that is not mounted with redirect_dir=off
+# but by default OVERLAY_FS_REDIRECT_DIR kernel option is enabled
+#
+#
 systemctl enable docker.service
 echo "adapt the cgroup driver of Docker to systemd"
 cat > /etc/docker/daemon.json <<EOF
@@ -24,8 +31,7 @@ cat > /etc/docker/daemon.json <<EOF
   "log-opts": {
     "max-size": "100m"
   },
-  "storage-driver": "overlay2",
-  "storage-opts": ["overlay2.override_kernel_check=true"]
+  "storage-driver": "overlay2"
 }
 EOF
 systemctl daemon-reload
