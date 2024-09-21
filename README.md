@@ -1,5 +1,7 @@
 # Devops_all_in_one_vm
 This vagrant build is intended to provide a virtualbox vm where you can have most devops tools to play with and nested KVM configured.
+
+ ----
 ![image](https://github.com/user-attachments/assets/9336afe4-a7b0-49a3-996f-92c002a28631)
 
 
