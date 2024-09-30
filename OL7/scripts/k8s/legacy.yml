@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: legacy-svc
+  labels:
+spec:
+  ports:
+  - name: web
+    port: 80
+  clusterIP: None
+  selector:
+    app: legacy-svc
+    
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: legacy
+spec:
+  selector:
+    matchLabels:
+      app: legacy
+  serviceName: legacy-svc
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app: legacy
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:stable
