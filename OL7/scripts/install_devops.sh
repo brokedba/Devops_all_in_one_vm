@@ -189,6 +189,8 @@ echo
 kubectl get nodes -o wide
 echo "==== Install the kubernetes Dashboard "
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+# if you use recommend yaml to deploy dashboard, you should only access your dashboard by https , 
+# and you should generete you certs, refer to guide [https://github.com/kubernetes/dashboard/wiki/Installation]
 # Starting from the release v7 for the Helm chart and v3 for the Kubernetes Dashboard, underlying architecture has changed, and it requires a clean installation.
 # Please remove previous installation first.
 # # Add kubernetes-dashboard repository
@@ -266,3 +268,18 @@ echo -e "${NC}installation done"
 # gpgcheck=1
 # gpgkey=https://repo.charm.sh/yum/gpg.key' | sudo tee /etc/yum.repos.d/charm.repo
 # yum install glow
+
+echo "******************************************************************************"
+echo "MetalLB & Oterrize" `date`
+echo "******************************************************************************"
+# To install MetalLB, apply the manifest:
+ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.5/config/manifests/metallb-native.yaml
+# helm repo add metallb https://metallb.github.io/metallb
+# helm install metallb metallb/metallb
+kubectl apply -f /vagrant/k8s/scripts/metallb.yml
+
+helm repo add otterize https://helm.otterize.com
+helm repo update
+helm install otterize otterize/otterize-kubernetes -n otterize-system --create-namespace
+
+ 

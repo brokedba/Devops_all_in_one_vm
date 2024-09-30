@@ -57,7 +57,7 @@ yum repolist
 echo "******************************************************************************"
 echo "Install Docker" `date`
 echo "******************************************************************************"
-yum install -y yum-utils zip unzip redhat-lsb-core
+yum install -y yum-utils zip unzip redhat-lsb-core screen
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 #yum install -q -y docker-engine 
 yum install -q -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin # docker-cli
