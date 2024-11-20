@@ -183,8 +183,8 @@ d323791a27cb   ansible/awx:17.0.1   "/usr/bin/tini -- /b…"   11 minutes ago   
 56385b68670d   redis                "docker-entrypoint.s…"   11 minutes ago       Up 11 minutes       6379/tcp                                awx_redis
 ```
 
-* [http://localhost:8080](http://localhost:8080)
-* [https://localhost:8443](https://localhost:8443)
+* [http://localhost:8090](http://localhost:8090)
+* [https://localhost:8443](https://localhost:8444)
 
 Log in using the following credentials, assuming you've not changed them.
 
