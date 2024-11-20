@@ -85,6 +85,8 @@ Listing Networks...
 | default | routed | 192.168.122.0/24 | True | default | nat  |
 +---------+--------+------------------+------+---------+------+
 ```
+**Note**
+> QEMU can be used with Kernel-based Virtual Machine (KVM) to emulate virtual machines (VMs) at near-native speeds. It's not using physical acceleration but logical one (not as fast/close as hardware acceleration).
 # TERRAFORM (KVM)
 ```
 
