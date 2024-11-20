@@ -184,7 +184,7 @@ d323791a27cb   ansible/awx:17.0.1   "/usr/bin/tini -- /b…"   11 minutes ago   
 ```
 
 * [http://localhost:8090](http://localhost:8090)
-* [https://localhost:8443](https://localhost:8444)
+* [https://localhost:8444](https://localhost:8444)
 
 Log in using the following credentials, assuming you've not changed them.
 
