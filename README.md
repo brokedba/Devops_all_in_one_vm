@@ -2,7 +2,15 @@
 This vagrant build is intended to provide a virtualbox vm where you can have most devops tools to play with and nested KVM configured.
 
 ✨ Please Read 👉🏼 [My blog to learn more](https://cloudthrill.ca/all-in-one-devops-vm).
-
+** Advantage **
+- full isolation
+- testing on Linux
+- synced folder from your host so you won't loose your dev lab manifests after vagrant destroy
+- reproducibility (Vagrantfile is IaC)
+- write code using code editors from the host OS
+- access dev services using browsers from the host OS
+- protect the host OS from the project impact
+- spin up a local Kubernetes cluster mess around / scratch / destroy / repeat
  ----
 ![image](https://github.com/user-attachments/assets/9336afe4-a7b0-49a3-996f-92c002a28631)
 
